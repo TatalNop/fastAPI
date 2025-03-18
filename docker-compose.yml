@@ -18,7 +18,8 @@ services:
     depends_on:
       - sqlserver
     environment:
-      DATABASE_URL: "mssql+pyodbc://sa:YourPassword@sqlserver:1433/your_db?driver=ODBC+Driver+17+for+SQL+Server"
+      - DATABASE_URL=mssql+pyodbc://sa:Password1234@db:1433/YourDB?driver=ODBC+Driver+17+for+SQL+Server
+      - PYTHONPATH=/app
       
 volumes:
   sqlserver_data:
