@@ -10,8 +10,8 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
-user_service:
-    build: ./user_service
+users_service:
+    build: ./users_service
     ports:
       - "8002:8002"
     depends_on:
