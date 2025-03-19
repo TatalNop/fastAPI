@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_container
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  bff_service:
+    build:
+      context: ./bff_service
+      dockerfile: Dockerfile
+    container_name: bff_service
+    ports:
+      - "8000:8000"
+    depends_on:
+
+      - mssql
+      - login_service
+      - users_service
+      - posts_service
+    volumes:
+      - ./config:/app/config
+      - ./bff_service:/app
+    command: >
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+
+  login_service:
+    build:
+      context: ./login_service
+      dockerfile: Dockerfile
+    container_name: login_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mssql
+    volumes:
+      - ./database:/app/database
+      - ./config:/app/config
+      - ./login_service:/app
+    command: >
+      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8001"
+
+  users_service:
+    build:
+      context: ./users_service
+      dockerfile: Dockerfile
+    container_name: users_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      - login_service
+    volumes:
+      - ./database:/app/database
+      - ./config:/app/config
+      - ./users_service:/app
+    command: >
+      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8002"
+
+  posts_service:
+    build:
+      context: ./posts_service
+      dockerfile: Dockerfile
+    container_name: posts_service
+    ports:
+      - "8003:8003"
+    depends_on:
+      - users_service
+    volumes:
+      - ./database:/app/database
+      - ./config:/app/config
+      - ./posts_service:/app
+    command: >
+      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8003"
+
+volumes:
+  mssql_data:
