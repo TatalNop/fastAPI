@@ -91,6 +91,8 @@ async def delete_user(user_id: int, token: dict = Depends(verify_token)):
     url = f"http://{users_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
         response = await client.delete(url)
+        if response.status_code == 204:  # No Content
+            return {"message": "Users deleted successfully"}
     return response.json()
 
 @app.put("/bff/posts/post_id")
@@ -107,4 +109,6 @@ async def delete_post(post_id: int, token: dict = Depends(verify_token)):
     url = f"http://{posts_service}/users/user_id?user_id={post_id}"
     async with httpx.AsyncClient() as client:
         response = await client.delete(url)
+        if response.status_code == 204:  # No Content
+            return {"message": "Posts deleted successfully"}
     return response.json()
