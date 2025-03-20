@@ -15,7 +15,7 @@ http://localhost:8003/docs (Posts Service)
 ## API Endpoints
 ```
 #BFF
-Method POST : http://localhost:8000/bff/login/access_token ( Login Get Access Token )
+Method POST : http://localhost:8000/bff/login/access_token ( Login "client_id.txt" Get Access Token )
 Method GET : http://localhost:8000/bff/get/all_users ( List All User )
 Method GET : http://localhost:8000/bff/bff/users/pagination ( List User Pagination )
 Method GET : http://localhost:8000/bff/posts/all ( List All Post )
