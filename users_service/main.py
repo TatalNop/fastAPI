@@ -8,7 +8,7 @@ app = FastAPI()
 
 #create databases and import data
 db = SessionLocal()
-#database_create()
+database_create()
 create_table()
 
 #Endpoint to get all user
