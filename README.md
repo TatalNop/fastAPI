@@ -3,6 +3,13 @@
 ```
 docker-compose up --build
 ```
+## Swagger UI
+```
+http://localhost:8000/docs (BFF API)
+http://localhost:8001/docs (Login API)
+http://localhost:8002/docs (Users API)
+http://localhost:8003/docs (Posts API)
+```
 ## API Endpoints Example
 ```
 #BFF
