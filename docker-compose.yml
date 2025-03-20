@@ -46,7 +46,7 @@ services:
       - ./config:/app/config
       - ./login_service:/app
     command: >
-      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8001"
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8001"
 
   users_service:
     build:
@@ -78,7 +78,7 @@ services:
       - ./config:/app/config
       - ./posts_service:/app
     command: >
-      sh -c "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8003"
+      sh -c "sleep 15 && uvicorn main:app --host 0.0.0.0 --port 8003"
 
 volumes:
   mssql_data:
