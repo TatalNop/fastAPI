@@ -21,7 +21,7 @@ class User(Base):
     email = Column(String)
 
     # One-to-many relationship with Post
-    posts = relationship("Post", back_populates="owner")
+    posts = relationship("Post", back_populates="owner", cascade="all, delete-orphan")
 
 # Post Model
 class Post(Base):
