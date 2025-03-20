@@ -6,7 +6,7 @@ from typing import List
 
 app = FastAPI()
 
-#database_create()
+database_create()
 create_table()
 db = SessionLocal()
 
