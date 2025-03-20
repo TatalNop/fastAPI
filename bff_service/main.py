@@ -91,7 +91,7 @@ async def add_post_by_user(post_data : PostsIn, token: dict = Depends(verify_tok
     url = f'http://{posts_service}/posts/add'
     async with httpx.AsyncClient() as client:
         response = await client.post(url,
-                                    json={"username" : post_data.username, 
+                                    json={"user_id" : post_data.user_id, 
                                           "body" : post_data.body,
                                           "title" : post_data.title})
     return response.json()
