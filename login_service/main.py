@@ -1,11 +1,10 @@
 from fastapi import FastAPI,HTTPException
 from config.schemas import Token, TokenRequest
 from config.config_file import OIDC_CONFIG
-from database.database import database_create
 import requests
 
 app = FastAPI()
-database_create()
+
 
 @app.post("/login", response_model=Token)
 async def get_token(request :TokenRequest):
