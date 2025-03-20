@@ -32,7 +32,7 @@ async def search_user(user_id : str):
 #Endpoint to add post
 @app.post("/posts/add", response_model=PostsIn)
 async def add_user(post_data : PostsIn):
-    user = db.query(User).filter(User.username == post_data.username).first()
+    user = db.query(User).filter(User.id == post_data.user_id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
