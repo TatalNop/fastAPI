@@ -6,7 +6,7 @@
 Clone the repository
 docker-compose up --build
 ```
-##Running Locally
+#### Running Locally
 ```
 1. Modify SQL_CONFIG in config/config_file.py
 2. Modify bff_service/main.py:
