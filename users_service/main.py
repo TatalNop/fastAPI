@@ -25,8 +25,8 @@ async def get_all_user():
 
 #Endpoint to get user by username
 @app.get("/users")
-async def get_user_by_username(username : str):
-   user = db.query(User).filter(User.username == username).first()
+async def get_user_by_username(user_id : str):
+   user = db.query(User).filter(User.id == user_id).first()
    if not user:
          raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
    return user
