@@ -15,6 +15,7 @@ class Users(BaseModel):
 
 class Posts(BaseModel):
     user_id : int
+    id : int
     title : str
     body : str
 
