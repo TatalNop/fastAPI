@@ -7,9 +7,10 @@ from typing import List
 app = FastAPI()
 
 #create databases and import data
-db = SessionLocal()
 database_create()
 create_table()
+
+db = SessionLocal()
 
 #Endpoint to get all user
 @app.get("/users/all",response_model=List[Users])
