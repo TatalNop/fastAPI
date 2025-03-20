@@ -24,7 +24,7 @@ async def get_all_posts():
 #Endpoint to search by user
 @app.get("/posts/user", response_model=UserWithPostsOut)
 async def search_user(user_id : str):
-    user = db.query(User).filter(User.user_id == user_id).first()
+    user = db.query(User).filter(User.id == user_id).first()
     if user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user
