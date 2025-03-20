@@ -97,7 +97,7 @@ async def add_post_by_user(post_data : PostsIn, token: dict = Depends(verify_tok
 
 @app.put("/bff/posts/post_id")
 async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(verify_token)):
-    url = f"http://{posts_service}/posts/post_id/?post_id={post_id}"
+    url = f"http://{posts_service}/posts/post_id?post_id={post_id}"
     async with httpx.AsyncClient() as client:
         response = await client.put(url,
                                     json={"title" : post.title,
@@ -106,7 +106,7 @@ async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(veri
 
 @app.delete("/bff/posts/post_id")
 async def delete_post(post_id: int, token: dict = Depends(verify_token)):
-    url = f"http://{posts_service}/posts/post_id/?post_id={post_id}"
+    url = f"http://{posts_service}/posts/post_id?post_id={post_id}"
     async with httpx.AsyncClient() as client:
         response = await client.delete(url)
         if response.status_code == 204:  # No Content
