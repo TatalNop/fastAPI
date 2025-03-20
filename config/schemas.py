@@ -31,7 +31,7 @@ class AddPosts(BaseModel):
     body : str
 
 class PostsIn(BaseModel):
-    username : str
+    user_id : int
     title : str
     body : str
 
