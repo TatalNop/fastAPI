@@ -80,8 +80,8 @@ async def get_post_all(token: dict = Depends(verify_token)):
     return response.json()
 
 @app.get("/bff/posts/search")
-async def get_post_by_user(username : str, token: dict = Depends(verify_token)):
-    url = f'http://{posts_service}/posts/user?username={username}'
+async def get_post_by_user(user_id : str, token: dict = Depends(verify_token)):
+    url = f'http://{posts_service}/posts/user?user_id={user_id}'
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
     return response.json()
