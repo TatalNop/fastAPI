@@ -32,7 +32,7 @@ Method PUT : http://localhost:8000/bff/users ( Update Existing User By User Id )
 Method DELETE : http://localhost:8000/bff/users ( Delete User By User Id)
 
 Method GET : http://localhost:8000/bff/get/all_posts ( List All Post )
-Method GET : http://localhost:8000/bff/posts/search ( List All Post By User Id )
+Method GET : http://localhost:8000/bff/posts/search ( List All Post By Username )
 Method POST : http://localhost:8000/bff/add/posts ( Add New Post By User Id )
 Method PUT : http://localhost:8000/bff/posts ( Update Existing Post By Post Id )
 Method DELETE : http://localhost:8000/bff/posts ( Delete Post By Post Id)
