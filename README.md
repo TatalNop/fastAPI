@@ -3,7 +3,16 @@
 
 ## Start
 ```
+Clone the repository
 docker-compose up --build
+```
+##Running Locally
+```
+1. Modify SQL_CONFIG in config/config_file.py
+2. Modify bff_service/main.py:
+     login_service = "127.0.0.1:8001"
+     users_service = "127.0.0.1:8002"
+     posts_service = "127.0.0.1:8003"
 ```
 ## Swagger UI
 ```
