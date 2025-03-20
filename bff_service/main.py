@@ -92,7 +92,7 @@ async def delete_user(user_id: int, token: dict = Depends(verify_token)):
 
 @app.put("/bff/posts/post_id")
 async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(verify_token)):
-    url = f"http://{posts_service}/users/user_id"
+    url = f"http://{posts_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
         response = await client.put(url)
     return response.json()
