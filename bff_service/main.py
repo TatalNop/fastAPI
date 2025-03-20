@@ -80,7 +80,7 @@ async def add_post_by_user(post_data : PostsIn, token: dict = Depends(verify_tok
 async def update_user(user_id: int, user: UpdateUser, token: dict = Depends(verify_token)):
     url = f"http://{users_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
-        response = await client.post(url,
+        response = await client.put(url,
                                     json={"name" : user.name, 
                                           "username" : user.username,
                                           "email" : user.email})
