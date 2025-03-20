@@ -21,7 +21,8 @@ login_service = "login_service:8001"
 users_service = "users_service:8002"
 posts_service = "posts_service:8003"
 
-@app.post("/bff/login/token")
+#Endpoint login get token
+@app.post("/bff/login/access_token")
 async def login_get_token(resuest : TokenRequest):
     url = f"http://{login_service}/login"
     async with httpx.AsyncClient() as client:
@@ -30,14 +31,15 @@ async def login_get_token(resuest : TokenRequest):
                                          "client_id": resuest.client_id, 
                                          "client_secret": resuest.client_secret})
     return response.json()
-
-@app.get("/bff/users/all")
+#Endpoint get all users
+@app.get("/bff/get/all_users")
 async def list_users_all(token: dict = Depends(verify_token)):
     url = f"http://{users_service}/users/all"
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
     return response.json()
 
+#Endpoint get user per page
 @app.get("/bff/users/pagination",response_model=List[Users])
 async def list_user_pagination(page: int = Query(1, ge=1), per_page: int = Query(3, ge=1), token: dict = Depends(verify_token)):
     start = (page - 1) * per_page
@@ -49,7 +51,8 @@ async def list_user_pagination(page: int = Query(1, ge=1), per_page: int = Query
     paginated_data = user_data[start:end]
     return paginated_data
 
-@app.put("/bff/users/user_id")
+#Endpoint update user by user id
+@app.put("/bff/users")
 async def update_user(user_id: int, user: UpdateUser, token: dict = Depends(verify_token)):
     url = f"http://{users_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
@@ -59,7 +62,8 @@ async def update_user(user_id: int, user: UpdateUser, token: dict = Depends(veri
                                           "email" : user.email})
     return response.json()
 
-@app.delete("/bff/users/user_id")
+#Endpoint delete users
+@app.delete("/bff/users")
 async def delete_user(user_id: int, token: dict = Depends(verify_token)):
     url = f"http://{users_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
@@ -68,7 +72,7 @@ async def delete_user(user_id: int, token: dict = Depends(verify_token)):
             return {"message": "Users deleted successfully"}
     return response.json()
 
-@app.get("/bff/posts/all")
+@app.get("/bff/get/all_posts")
 async def get_post_all(token: dict = Depends(verify_token)):
     url = f"http://{posts_service}/posts/all"
     async with httpx.AsyncClient() as client:
@@ -82,7 +86,7 @@ async def get_post_by_user(username : str, token: dict = Depends(verify_token)):
         response = await client.get(url)
     return response.json()
 
-@app.post("/bff/posts/add")
+@app.post("/bff/add/posts")
 async def add_post_by_user(post_data : PostsIn, token: dict = Depends(verify_token)):
     url = f'http://{posts_service}/posts/add'
     async with httpx.AsyncClient() as client:
@@ -92,7 +96,7 @@ async def add_post_by_user(post_data : PostsIn, token: dict = Depends(verify_tok
                                           "title" : post_data.title})
     return response.json()
 
-@app.put("/bff/posts/post_id")
+@app.put("/bff/posts")
 async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(verify_token)):
     url = f"http://{posts_service}/posts/post_id?post_id={post_id}"
     async with httpx.AsyncClient() as client:
@@ -101,7 +105,7 @@ async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(veri
                                           "body" : post.body})
     return response.json()
 
-@app.delete("/bff/posts/post_id")
+@app.delete("/bff/posts")
 async def delete_post(post_id: int, token: dict = Depends(verify_token)):
     url = f"http://{posts_service}/posts/post_id?post_id={post_id}"
     async with httpx.AsyncClient() as client:
