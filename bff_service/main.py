@@ -81,9 +81,9 @@ async def update_user(user_id: int, user: UpdateUser, token: dict = Depends(veri
     url = f"http://{users_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
         response = await client.post(url,
-                                    json={"name" : user_id.name, 
-                                          "username" : user_id.username,
-                                          "email" : user_id.email})
+                                    json={"name" : user.name, 
+                                          "username" : user.username,
+                                          "email" : user.email})
     return response.json()
 
 @app.delete("/bff/users/user_id")
@@ -98,8 +98,8 @@ async def update_post(post_id: int, post: UpdatePost, token: dict = Depends(veri
     url = f"http://{posts_service}/users/user_id?user_id={user_id}"
     async with httpx.AsyncClient() as client:
         response = await client.put(url,
-                                    json={"title" : post_id.title,
-                                          "body" : post_id.body})
+                                    json={"title" : post.title,
+                                          "body" : post.body})
     return response.json()
 
 @app.delete("/bff/posts/post_id")
