@@ -5,9 +5,6 @@ from config.schemas import PostsIn, TokenRequest,Users,UpdateUser,UpdatePost
 from config.config_file import OIDC_CONFIG
 from typing import List
 # Auth0 Configurations
-#AUTH0_DOMAIN = "dev-mkmcn247grdl7y20.us.auth0.com"
-#API_AUDIENCE = "https://backend_login_api.com"
-#ALGORITHMS = ["RS256"]
 AUTH0_DOMAIN = OIDC_CONFIG['domain']
 ALGORITHMS = OIDC_CONFIG['algorithms']
 API_AUDIENCE = OIDC_CONFIG['audience']
