@@ -12,7 +12,7 @@ http://localhost:8001/docs (Login Service)
 http://localhost:8002/docs (Users Servive)
 http://localhost:8003/docs (Posts Service)
 ```
-## API Endpoints Example
+## API Endpoints
 ```
 #BFF
 Method POST : http://localhost:8000/bff/login/token ( Login Get Token Using )
@@ -25,4 +25,15 @@ Method PUT : http://localhost:8000/bff/users/user_id ( Update Existing Username 
 Method DELETE : http://localhost:8000/bff/users/user_id ( Delete Existing Username By User Id)
 Method PUT :  http://localhost:8000/bff/posts/post_id ( Update Existing Post By Post Id )
 Method DELETE :  http://localhost:8000/bff/posts/post_id ( Delete Existing Post By Post Id )
+```
+## Example Call API
+```
+curl -X POST "http://localhost:8000/bff/login/token" \
+     -H "Content-Type: application/json" \
+     -d '{
+          "client_id": "your_client_id",
+          "client_secret": "your_client_secret"
+         }'
+
+curl -X GET "http://localhost:8000/bff/users/all" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
